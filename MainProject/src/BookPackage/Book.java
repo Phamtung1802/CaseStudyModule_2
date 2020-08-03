@@ -9,14 +9,13 @@ public class Book {
     private String category;
     private String iD;
 
-    public Book(String name, long price, String date, String author, String publisher,String category,String iD) {
+    public Book(String name, long price, String date, String author, String publisher,String category) {
         this.name = name;
         this.price = price;
         this.date = date;
         this.author = author;
         this.publisher = publisher;
         this.category= category;
-        this.iD=iD;
     }
 
     @Override
