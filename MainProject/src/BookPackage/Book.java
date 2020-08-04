@@ -8,23 +8,28 @@ public class Book {
     private String publisher;
     private String category;
     private String iD;
+    private String lang;
 
-    public Book(String name, long price, String s, String date, String author, String publisher, String category) {
+    public Book(String name,String lang, long price, String date, String author, String publisher, String category) {
         this.name = name;
         this.price = price;
         this.date = date;
         this.author = author;
         this.publisher = publisher;
         this.category= category;
+        this.lang=lang;
     }
 
     @Override
     public String toString(){
-        return "Author "+ this.getAuthor()+"\n"+
-                "Name "+ this.getName()+"\n"+
+        return  "Name "+ this.getName()+"\n"+
+                "Language "+ this.getLang()+"\n"+
+                "Author "+ this.getAuthor()+"\n"+
                 "Date "+ this.getDate()+"\n"+
                 "Price "+ this.getPrice()+"\n"+
-                "ID "+ this.getAuthor()+"\n";
+                "Publisher "+this.getPublisher()+"\n"+
+                "Category "+ this.getCategory()+"\n";
+
     }
 
     public String getCategory() {
@@ -81,6 +86,14 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 
 }
