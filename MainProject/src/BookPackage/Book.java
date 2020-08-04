@@ -9,7 +9,7 @@ public class Book {
     private String category;
     private String iD;
 
-    public Book(String name, long price, String date, String author, String publisher,String category) {
+    public Book(String name, long price, String s, String date, String author, String publisher, String category) {
         this.name = name;
         this.price = price;
         this.date = date;
