@@ -26,19 +26,24 @@ public class DataControl implements Serializable {
         return input;
     }
 
-    private static FileWriter getWriter(File getIDFile) {
+    private static FileWriter getWriter(File getIDFile,boolean doesAppend) {
         File IDcode = getIDFile;
         FileWriter output=null;
         try {
-            output = new FileWriter(IDcode);
+            if(doesAppend==false) {
+                output = new FileWriter(IDcode);
+            }
+            else {
+                output=new FileWriter(IDcode,true);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return output;
     }
 
-    public void WriteFile(BookList list) {
-        FileWriter writer=getWriter(getIDFile());
+    public void WriteFile(BookList list,boolean doesAppend) {
+        FileWriter writer=getWriter(getIDFile(),doesAppend);
         list.forEach((k, v) -> {
             System.out.format("key: %s ", k);
             try {
@@ -58,6 +63,28 @@ public class DataControl implements Serializable {
         }
     }
 
+
+
+    public void AppendFile(File csvFile,BookList list)  {
+        FileWriter writer=getWriter(getIDFile(),true);
+        FileReader reader=getReader(csvFile);
+        StringBuffer data=new StringBuffer("");
+        int code=-1;
+        try {
+            while ((code =reader.read())!= -1) {
+                data.append((char)code);
+                System.out.println("appending");
+            }
+            reader.close();
+            System.out.println(data);
+            writer.append(data);
+            writer.close();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public static BookList loadList()  {
         BookList list=new BookList();
         FileReader reader=getReader(getIDFile());
@@ -66,13 +93,16 @@ public class DataControl implements Serializable {
             while((a=reader.read())!=-1) {
                 data.append((char) a);
             }
+            reader.close();
         }catch (IOException e){
             e.printStackTrace();
         }
         String[] newdata=data.toString().split("\n");
-        for(int i=0;i<newdata.length;i++){
-            String[] tempstr=newdata[i].split(",");
-            list.put(tempstr[0],new Book(tempstr[1],tempstr[2],Long.parseLong(tempstr[3]),tempstr[4],tempstr[5],tempstr[6],tempstr[7]));
+        if(newdata.length>1) {
+            for (int i = 0; i < newdata.length; i++) {
+                String[] tempstr = newdata[i].split(",");
+                list.put(tempstr[0], new Book(tempstr[1], tempstr[2], Long.parseLong(tempstr[3]), tempstr[4], tempstr[5], tempstr[6], tempstr[7]));
+            }
         }
         return list;
     }

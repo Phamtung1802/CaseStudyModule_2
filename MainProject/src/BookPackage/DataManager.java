@@ -1,5 +1,7 @@
 package BookPackage;
 
+import java.io.File;
+
 public class DataManager {
     private static DataControl data=DataControl.getINSTANCE();
     private static BookList lib=new BookList();
@@ -16,11 +18,12 @@ public class DataManager {
 
     public BookList addBook(String id,String name,String lang, long price, String date, String author, String publisher, String category){
         this.lib.put(id,new Book(lang,name,price,date,author,publisher,category));
+        DataControl.getINSTANCE().WriteFile(lib,false);
         return lib;
     }
 
     public void WriteFile(){
-        DataControl.getINSTANCE().WriteFile(lib);
+        DataControl.getINSTANCE().WriteFile(lib,false);
     }
 
     public void read(){
@@ -45,6 +48,11 @@ public class DataManager {
 
     public void setData(DataControl data) {
         this.data = data;
+    }
+
+    public void appendData(String csvFilePath){
+        File csvFile=new File(csvFilePath);
+        DataControl.getINSTANCE().AppendFile(csvFile,lib);
     }
 
 }
