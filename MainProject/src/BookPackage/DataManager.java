@@ -18,7 +18,7 @@ public class DataManager {
 
     public BookList addBook(String id,String name,String lang, long price, String date, String author, String publisher, String category){
         this.lib.put(id,new Book(lang,name,price,date,author,publisher,category));
-        DataControl.getINSTANCE().WriteFile(lib,false);
+        this.WriteFile();
         return lib;
     }
 

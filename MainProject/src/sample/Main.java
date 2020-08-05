@@ -29,7 +29,11 @@ public class Main extends Application {
 
 //        System.out.println(DataManager.getINSTANCE().addBook("001","English","Cuon Sach 1",1000, "01/06/2007","Tac Gia 1","NXB Kim Dong","Giao Duc"));
 //        System.out.println(DataManager.getINSTANCE().addBook("002","English","Cuon Sach 2",1000, "01/06/2007","Tac Gia 1","NXB Kim Dong","Giao Duc"));
+//        DataManager.getINSTANCE().appendData("appendtest.txt");
+        DataManager.getINSTANCE().read();
         System.out.println(DataManager.getINSTANCE().getLib());
+        System.out.println(DataManager.getINSTANCE().addBook("1","English","Cuon Sach 2",1000, "01/06/2007","Tac Gia 1","NXB Kim Dong","Giao Duc"));
+        DataManager.getINSTANCE().WriteFile();
 
     }
 }
