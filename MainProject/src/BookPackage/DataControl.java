@@ -73,7 +73,6 @@ public class DataControl implements Serializable {
         try {
             while ((code =reader.read())!= -1) {
                 data.append((char)code);
-                System.out.println("appending");
             }
             reader.close();
             System.out.println(data);

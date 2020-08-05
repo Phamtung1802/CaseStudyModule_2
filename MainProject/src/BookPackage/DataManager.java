@@ -53,6 +53,7 @@ public class DataManager {
     public void appendData(String csvFilePath){
         File csvFile=new File(csvFilePath);
         DataControl.getINSTANCE().AppendFile(csvFile,lib);
+        read();
     }
 
 }
